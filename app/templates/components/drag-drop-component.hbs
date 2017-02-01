@@ -1,0 +1,33 @@
+<div class="selected-users">
+  {{#drag-drop-zone dropped="addUser"}}
+    <ul class="selected-users-list">
+      {{#each selectedUsers as |user|}}
+        <li>{{user.firstName}}
+          <a href="#" {{action 'removeUser' user}}>&times;</a>
+        </li>
+      {{else}}
+        <p>Drag someone here</p>
+      {{/each}}
+
+    </ul>
+  {{/drag-drop-zone}}
+</div>
+
+<div class="available-users">
+  <header>
+    <h4>Users left to add: {{remainingUsersLength}} </h4>
+  </header>
+  {{#each remainingUsers as |user|}}
+    {{#drag-item content=user.id}}
+      <span>{{user.firstName}}</span>
+    {{/drag-item}}
+  {{else}}
+    <p>There is no one left to add!</p>
+  {{/each}}
+</div>
+
+<div class="controls">
+  <button class="btn" {{action 'addAllUsers'}}>Add everyone</button>
+  <button class="btn" {{action 'removeAllUsers'}}>Remove everyone</button>
+</div>
+{{yield}}
